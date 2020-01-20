@@ -1,3 +1,12 @@
 body {
     font-family: 'Roboto', sans-serif;
+    margin: auto;
+}
+header {
+    height: 3rem;
+    display: flex;
+}
+header img {
+    height: 100%;
+    margin: 1rem;
 }
