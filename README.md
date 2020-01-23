@@ -1,6 +1,7 @@
 # Project Biblio
 
 Le site web d'une bibliothèque imaginaire.
+http://note.ly/kazanye
 
 ## Gestion d'une bibliothèque
 
