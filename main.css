@@ -1,12 +1,33 @@
-body {
+* {
     font-family: 'Roboto', sans-serif;
+}
+.grid {
     margin: auto;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 
+        8rem repeat(8,1fr) 8rem;
+    grid-template-rows: 8rem;
+    grid-auto-rows: 8rem; 
+    grid-gap: 1rem;
 }
-header {
-    height: 3rem;
-    display: flex;
+
+.cell {
+    margin: 0;
+    padding: 1rem;
+    background: #a6ff00;
 }
-header img {
+
+.top-logo {
+    grid-column: span 1;
+}
+.top-logo-img {
     height: 100%;
-    margin: 1rem;
+}
+.top-title {
+    grid-column: span 8;
+}
+.top-navbar {
+    grid-column: span 10;
+    
 }
