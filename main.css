@@ -7,12 +7,12 @@
     display: grid;
     grid-template-columns: 
         8rem repeat(8,1fr) 8rem;
-    grid-template-rows: 8rem;
+    grid-template-rows: 8rem 3rem 16rem;
     grid-auto-rows: 8rem; 
-    grid-gap: 1rem;
+    grid-gap: .5rem;
 }
 
-.cell {
+.grid > * {
     margin: 0;
     padding: 1rem;
     background: #a6ff00;
@@ -21,13 +21,28 @@
 .top-logo {
     grid-column: span 1;
 }
-.top-logo-img {
+.img-fill {
     height: 100%;
 }
 .top-title {
     grid-column: span 8;
+    font-size: 3rem;
+    text-align: center;
 }
-.top-navbar {
+.main-navbar {
     grid-column: span 10;
-    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.main-navbar a {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black;
+}
+.main-main {
+    grid-column: span 8;
+}
+.basket {
+    grid-column: span 2;
 }
