@@ -1,2 +1,2 @@
 # Project Biblio
-![alt text](/.misc/afpa-biblio.png "Corkboard with sticky notes")
+![alt text](/.misc/afpa-biblio.PNG?raw=true "Corkboard with sticky notes")
