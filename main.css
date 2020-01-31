@@ -1,5 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
+    background-color: orange;
 }
 .grid {
     margin: auto;
@@ -25,9 +26,12 @@
     height: 100%;
 }
 .top-title {
-    grid-column: span 8;
+    grid-column: span 7;
     font-size: 3rem;
     text-align: center;
+}
+.login-box {
+    grid-column: span 2;
 }
 .main-navbar {
     grid-column: span 10;

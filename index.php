@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,17 +10,25 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <!-- <script src='main.js'></script> -->
 </head>
 
 <body class="grid">
 
     <div class="top-logo">
-        <img src="/images/library_icon.svg" class="img-fill">
+        <img src="images/library_icon.svg" class="img-fill">
     </div>
+
     <h1 class="top-title">Project Biblio</h1>
-    <div class="cell top-logo">
-        <img src="/images/library_icon.svg" class="img-fill">
+    <div class="login-box">
+        <p>Identifiez-vous :</p>
+        <form action="php/user_login.php" method="get">
+            <input type="text" name="user"><br>
+            <input type="password" name="pass"><br>
+            <button type="submit">Connexion</button><br>
+            <?php var_dump($_SESSION); ?>
+        </form>
+
     </div>
 
     <nav class="main-navbar">
