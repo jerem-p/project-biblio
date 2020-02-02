@@ -9,7 +9,7 @@
     <title>Project Biblio</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <!-- <script src='main.js'></script> -->
 </head>
 
@@ -21,13 +21,23 @@
 
     <h1 class="top-title">Project Biblio</h1>
     <div class="login-box">
-        <p>Identifiez-vous :</p>
-        <form action="php/user_login.php" method="get">
-            <input type="text" name="user"><br>
-            <input type="password" name="pass"><br>
-            <button type="submit">Connexion</button><br>
-            <?php var_dump($_SESSION); ?>
-        </form>
+
+        <?php
+        if (isset($_SESSION['user'])) {
+            echo $_SESSION['user'] . '<br>' . 
+            $_SESSION['pass'] . '<br>' . 
+            '<a href="php/user_connect.php">Déconnexion</a>';
+        } else {
+        ?>
+            Identifiez-vous :
+            <form action="php/user_connect.php" method="get">
+                <input type="text" name="user"><br>
+                <input type="password" name="pass"><br>
+                <button type="submit">Connexion</button><br>
+            </form>
+        <?php
+        }
+        ?>
 
     </div>
 

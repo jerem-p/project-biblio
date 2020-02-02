@@ -1,6 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
-    background-color: orange;
+    background-color: rgb(243, 218, 171);
 }
 .grid {
     margin: auto;
@@ -16,7 +16,7 @@
 .grid > * {
     margin: 0;
     padding: 1rem;
-    background: #a6ff00;
+    background: #cbe69a;
 }
 
 .top-logo {
