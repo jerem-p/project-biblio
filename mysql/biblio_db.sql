@@ -1,0 +1,285 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : Dim 02 fév. 2020 à 17:39
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.4.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `biblio_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `authors`
+--
+
+CREATE TABLE `authors` (
+  `author_id` int(8) NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `middle_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `books`
+--
+
+CREATE TABLE `books` (
+  `book_id` int(8) NOT NULL,
+  `status_id` int(1) NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `published_date` date DEFAULT NULL,
+  `publisher_id` int(8) DEFAULT NULL,
+  `collection_id` int(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `book_authors`
+--
+
+CREATE TABLE `book_authors` (
+  `book_id` int(8) NOT NULL,
+  `author_id` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `book_genres`
+--
+
+CREATE TABLE `book_genres` (
+  `book_id` int(8) NOT NULL,
+  `genre_id` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `book_rentals`
+--
+
+CREATE TABLE `book_rentals` (
+  `rental_id` int(8) NOT NULL,
+  `user_id` char(9) COLLATE utf8_unicode_ci NOT NULL,
+  `book_id` int(8) NOT NULL,
+  `rental_start` date NOT NULL,
+  `rental_end` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `collections`
+--
+
+CREATE TABLE `collections` (
+  `collection_id` int(8) NOT NULL,
+  `collection` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `genres`
+--
+
+CREATE TABLE `genres` (
+  `genre_id` int(8) NOT NULL,
+  `genre` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `publishers`
+--
+
+CREATE TABLE `publishers` (
+  `publisher_id` int(8) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` char(9) COLLATE utf8_unicode_ci NOT NULL,
+  `category_id` int(1) NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone_number` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `street_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postal_code` char(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `membership_start` date NOT NULL,
+  `membership_end` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_categories`
+--
+
+CREATE TABLE `user_categories` (
+  `category_id` int(1) NOT NULL,
+  `category` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `max_books` int(2) NOT NULL,
+  `max_days` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `user_categories`
+--
+
+INSERT INTO `user_categories` (`category_id`, `category`, `max_books`, `max_days`) VALUES
+(1, 'professeur', 8, 28),
+(2, 'étudiant', 3, 14);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `authors`
+--
+ALTER TABLE `authors`
+  ADD PRIMARY KEY (`author_id`);
+
+--
+-- Index pour la table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`book_id`),
+  ADD KEY `fk_publisher` (`publisher_id`),
+  ADD KEY `fk_collection` (`collection_id`);
+
+--
+-- Index pour la table `book_authors`
+--
+ALTER TABLE `book_authors`
+  ADD PRIMARY KEY (`book_id`,`author_id`),
+  ADD KEY `fk_author` (`author_id`);
+
+--
+-- Index pour la table `book_genres`
+--
+ALTER TABLE `book_genres`
+  ADD PRIMARY KEY (`book_id`,`genre_id`);
+
+--
+-- Index pour la table `book_rentals`
+--
+ALTER TABLE `book_rentals`
+  ADD PRIMARY KEY (`rental_id`),
+  ADD KEY `fk_users` (`user_id`),
+  ADD KEY `fk_books` (`book_id`);
+
+--
+-- Index pour la table `collections`
+--
+ALTER TABLE `collections`
+  ADD PRIMARY KEY (`collection_id`);
+
+--
+-- Index pour la table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`genre_id`);
+
+--
+-- Index pour la table `publishers`
+--
+ALTER TABLE `publishers`
+  ADD PRIMARY KEY (`publisher_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `user_category` (`category_id`);
+
+--
+-- Index pour la table `user_categories`
+--
+ALTER TABLE `user_categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `book_rentals`
+--
+ALTER TABLE `book_rentals`
+  MODIFY `rental_id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `books`
+--
+ALTER TABLE `books`
+  ADD CONSTRAINT `fk_collection` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`collection_id`),
+  ADD CONSTRAINT `fk_publisher` FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`publisher_id`);
+
+--
+-- Contraintes pour la table `book_authors`
+--
+ALTER TABLE `book_authors`
+  ADD CONSTRAINT `fk_author` FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_book` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `book_genres`
+--
+ALTER TABLE `book_genres`
+  ADD CONSTRAINT `fk_book_genre` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_genre_book` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`genre_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `book_rentals`
+--
+ALTER TABLE `book_rentals`
+  ADD CONSTRAINT `fk_books` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `user_categories` (`category_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
