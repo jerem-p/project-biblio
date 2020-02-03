@@ -1,5 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
+    background-color: #fcae56;
 }
 .grid {
     margin: auto;
@@ -15,7 +16,7 @@
 .grid > * {
     margin: 0;
     padding: 1rem;
-    background: #a6ff00;
+    background: #42defa;
 }
 
 .top-logo {
@@ -25,9 +26,12 @@
     height: 100%;
 }
 .top-title {
-    grid-column: span 8;
+    grid-column: span 7;
     font-size: 3rem;
     text-align: center;
+}
+.login-box {
+    grid-column: span 2;
 }
 .main-navbar {
     grid-column: span 10;
