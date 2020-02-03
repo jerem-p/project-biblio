@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page = 'Accueil';
+$page = 'Livres';
 ?>
 
 <!-- ------------------------------------------------------------- -->
@@ -20,14 +20,27 @@ $page = 'Accueil';
 <!-- ------------------------------------------------------------- -->
 
 <body class="grid">
-    
+
     <?php
     include '_header.php';
     ?>
 
+
     <main class="main-main">
-        Main
-        
+
+        <?php
+        $pdo = new PDO('mysql:host=localhost;dbname=biblio_db', 'root', '');
+        $query = $pdo->query(
+            "SELECT * FROM books NATURAL JOIN book_authors NATURAL JOIN authors WHERE first_name='john'"
+        );
+
+        $data = $query->fetchAll();
+        foreach($data as $book) {
+            echo $book['title'];
+        }
+
+        ?>
+
 
     </main>
 
@@ -35,12 +48,13 @@ $page = 'Accueil';
 
 
     <aside class="basket">
+
         Panier
+
     </aside>
 
 
 
 
 </body>
-
 </html>

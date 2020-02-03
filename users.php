@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page = 'Accueil';
+$page = 'Usagers';
 ?>
 
 <!-- ------------------------------------------------------------- -->
@@ -20,14 +20,14 @@ $page = 'Accueil';
 <!-- ------------------------------------------------------------- -->
 
 <body class="grid">
-    
+
     <?php
     include '_header.php';
     ?>
 
     <main class="main-main">
         Main
-        
+
 
     </main>
 
