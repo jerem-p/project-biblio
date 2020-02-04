@@ -29,7 +29,7 @@ $page = 'Livres';
     <main class="main-main">
 
         <?php
-        $pdo = new PDO('mysql:host=localhost;dbname=biblio_db', 'root', '');
+        $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
         $query = $pdo->query(
             "SELECT * FROM books NATURAL JOIN book_authors NATURAL JOIN authors WHERE first_name='john'"
         );

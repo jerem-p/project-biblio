@@ -8,7 +8,7 @@ if (!$_SERVER['QUERY_STRING']) {     // depuis le lien "déconnexion"
 } else {
     $user_id_input = $_GET['user_id'];      // depuis l'inputbox
 
-    $pdo = new PDO('mysql:host=localhost;dbname=biblio_db', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
     $query = $pdo->query(
         "SELECT * FROM users NATURAL JOIN user_categories WHERE user_id='$user_id_input'"    // sql sur db
     );
