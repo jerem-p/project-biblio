@@ -25,7 +25,7 @@
 
     <?php
     }
-    
+
     ?>
 
 </div>
@@ -35,4 +35,14 @@
     <a href="index.php">Accueil</a>
     <a href="books.php">Livres</a>
     <a href="users.php">Usagers</a>
+    <?php
+    if (isset($_SESSION['user_id'])) {
+    ?>
+
+        <a href="user_account.php">Mon compte</a>
+
+    <?php
+    }
+    ?>
+
 </nav>
