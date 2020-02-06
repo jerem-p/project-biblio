@@ -15,6 +15,10 @@ $page = 'Livres';
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>        <!-- required for DataTables -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
 </head>
 
 <!-- ------------------------------------------------------------- -->
@@ -28,18 +32,86 @@ $page = 'Livres';
 
     <main class="main-main">
 
+        <form action="books.php">
+            <fieldset name="recherche">
+                <legend>Recherche par critères</legend>
+                Nom ou prénom: <input type="text" name="author"><wbr>
+                Titre: <input type="text" name="title"><br>
+                Genre: <select name="genre">            <!-- menu déroulant des thèmes -->
+                    <option value='' default>tous</option>
+                    <?php
+                    $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+                    $query = $pdo->query("SELECT genre_id, genre FROM `genres`");
+                    $data = $query->fetchAll();
+                    foreach ($data as $genre) {
+                        echo "<option value='$genre[genre_id]'>$genre[genre]</option>";
+                    }
+                    ?>
+                </select>
+
+                <input type="submit" value="Rechercher">
+
+            </fieldset>
+        </form>
+
+
+
+
         <?php
-        $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
-        $query = $pdo->query(
-            "SELECT * FROM books NATURAL JOIN book_authors NATURAL JOIN authors WHERE first_name='john'"
-        );
+        if ($_SERVER['QUERY_STRING']) {
 
-        $data = $query->fetchAll();
-        foreach($data as $book) {
-            echo $book['title'];
-        }
+            $sql = "SELECT DISTINCT genre_id, genre, title, concat(first_name, ' ', last_name) AS author 
+            FROM genres NATURAL JOIN book_genres NATURAL JOIN books NATURAL JOIN book_authors NATURAL JOIN authors";
+            $word = ' WHERE ';          /* premier mot avant les critères de filtrage */
 
+            if ($_GET['author'] != '') {
+                $sql .= $_GET['author'] = $word . "concat(first_name, ' ', last_name) LIKE '%$_GET[author]%'";
+                $word = ' AND ';        /* changement du mot avant les potentiels critères supplémentaires */
+            }
+            if ($_GET['title'] != '') {
+                $sql .= $_GET['author'] = $word . "title LIKE '%$_GET[title]%'";
+                $word = ' AND ';
+            }
+            if ($_GET['genre'] != '') {
+                $sql .= $_GET['author'] = $word . "genre_id = '$_GET[genre]'";
+                $word = ' AND ';
+            }
+
+            $sql .= " GROUP BY title";
+
+            $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+            $query = $pdo->query($sql);
+            $data = $query->fetchAll();
         ?>
+
+
+
+            <table id="results">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                foreach ($data as $book) {
+                    echo "<tr><td>$book[title]</td><td>$book[author]</td><td>$book[genre]</td></tr>";
+                }
+            }
+                ?>
+
+                </tbody>
+            </table>
+
+
+            <script>
+                $(document).ready(function() {
+                    $('#results').DataTable();
+                });
+            </script>
 
 
     </main>
@@ -57,4 +129,5 @@ $page = 'Livres';
 
 
 </body>
+
 </html>
