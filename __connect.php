@@ -7,6 +7,7 @@ if (!$_SERVER['QUERY_STRING']) {     // depuis le lien "déconnexion"
     session_destroy();
 } else {
     $user_id_input = $_GET['user_id'];      // depuis l'inputbox
+    $user_pw_input = $_GET['user_pw'];
 
     $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
     $query = $pdo->query(
@@ -14,10 +15,18 @@ if (!$_SERVER['QUERY_STRING']) {     // depuis le lien "déconnexion"
     );
     $user_data = $query->fetch();  // aller chercher les infos de l'utilisateur
 
+
+
+
+
+
     if (isset($user_data['user_id'])) {
+        if (password_verify ($user_pw_input, $user_data['password']))   // verif sur le hass BCRYPT dans la db
+
+        {
         $_SESSION['user_id'] = $user_data['user_id'];   // confirmation du user_id
         $_SESSION['user_first_name'] = $user_data['first_name'];    // prénom à afficher en header
-        $_SESSION['user_category'] = $user_data['category'];
+        $_SESSION['user_category'] = $user_data['category'];}
     }
 }
 

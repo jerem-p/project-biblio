@@ -20,6 +20,7 @@
         Identifiez-vous :
         <form action="__connect.php" method="get">
             <input type="text" name="user_id"><br>
+            <input type="password" name="user_pw"><br>
             <button type="submit">Connexion</button><br>
         </form>
 
