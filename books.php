@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '__dao.php';
 $page = 'Livres';
 ?>
 
@@ -40,7 +41,7 @@ $page = 'Livres';
                 Genre: <select name="genre">            <!-- menu déroulant des thèmes -->
                     <option value='' default>tous</option>
                     <?php
-                    $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+                    $pdo = mysqlPDO();      // function in require '__dao.php';
                     $query = $pdo->query("SELECT genre_id, genre FROM `genres`");
                     $data = $query->fetchAll();
                     foreach ($data as $genre) {
@@ -79,7 +80,7 @@ $page = 'Livres';
 
             $sql .= " GROUP BY title";
 
-            $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+            $pdo = mysqlPDO();      // function in require '__dao.php';
             $query = $pdo->query($sql);
             $data = $query->fetchAll();
         ?>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '__dao.php';
 $page = 'Mon compte';
 ?>
 
@@ -28,7 +29,7 @@ $page = 'Mon compte';
     <main class="main-main">
 
         <?php
-        $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+        $pdo = mysqlPDO();      // function in require '__dao.php'
         $query = $pdo->query(
             "SELECT * FROM users NATURAL JOIN user_categories WHERE `user_id`='$_SESSION[user_id]'"
         );

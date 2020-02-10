@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '__dao.php';
 $from = $_SERVER['HTTP_REFERER'];   // page d'origine
 
 
@@ -9,7 +10,7 @@ if (!$_SERVER['QUERY_STRING']) {     // depuis le lien "déconnexion"
     $user_id_input = $_GET['user_id'];      // depuis l'inputbox
     $user_pw_input = $_GET['user_pw'];
 
-    $pdo = new PDO('mysql:host=localhost;dbname=biblio_db;charset=utf8', 'root', '');
+    $pdo = mysqlPDO();      // function in require '__dao.php'
     $query = $pdo->query(
         "SELECT * FROM users NATURAL JOIN user_categories WHERE user_id='$user_id_input'"    // sql sur db
     );
