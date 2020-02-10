@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 03 fév. 2020 à 21:39
+-- Généré le : lun. 10 fév. 2020 à 15:18
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.1
 
@@ -7668,6 +7668,7 @@ INSERT INTO `publishers` (`publisher_id`, `name`) VALUES
 
 CREATE TABLE `users` (
   `user_id` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(1) NOT NULL,
   `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -7684,9 +7685,10 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`user_id`, `category_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `street_address`, `city_name`, `postal_code`, `membership_start`, `membership_end`) VALUES
-('BONDID001', 1, 'Didier', 'Bonneau', 'didier.bonneau@afpa.fr', '0600000000', '9, rue Marc Seguin', 'Créteil', '94000', '2019-10-28', '2020-10-28'),
-('PIRJER001', 2, 'Jeremy', 'Pirou', 'jeremy.pirou@afpa.fr', '0628064152', '6, rue des Développeurs', 'Choisy-le-Roi', '94600', '2019-11-18', '2020-11-18');
+INSERT INTO `users` (`user_id`, `password`, `category_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `street_address`, `city_name`, `postal_code`, `membership_start`, `membership_end`) VALUES
+('BIBPRO001', '$2y$10$rzTCubCjVFV6f2l27VEUz.Diyof32oq9vnQfBFHuZ8d8YXBEN6cqi', 1, 'Project', 'Biblio', 'project.biblio@afpa.fr', '0611223344', '1, rue de l\'Afpa', 'Afpaville', '90000', '2019-11-25', '2020-11-25'),
+('BONDID001', '$2y$10$iaLpRocTJ5FAiYA2X7ccJeBH8SvLy2fP23pH2Dlp00leT/xf7mVeC', 2, 'Didier', 'Bonneau', 'didier.bonneau@afpa.fr', '0600000000', '9, rue Marc Seguin', 'Créteil', '94000', '2019-10-28', '2020-10-28'),
+('PIRJER001', '$2y$10$bVdlD77gwldLkvi6qxvHlesUqizhD3A0EpeaMKj13Ue/sWSPh/aHy', 3, 'Jeremy', 'Pirou', 'jeremy.pirou@afpa.fr', '0628064152', '6, rue des Développeurs', 'Choisy-le-Roi', '94600', '2019-11-18', '2020-11-18');
 
 -- --------------------------------------------------------
 
@@ -7707,8 +7709,9 @@ CREATE TABLE `user_categories` (
 --
 
 INSERT INTO `user_categories` (`category_id`, `category`, `max_books_borrow`, `max_days_borrow`, `max_days_reserv`) VALUES
-(1, 'professeur', 8, 28, 7),
-(2, 'etudiant', 3, 14, 7);
+(1, 'administrateur', 99, 99, 99),
+(2, 'professeur', 8, 28, 7),
+(3, 'étudiant', 3, 14, 7);
 
 --
 -- Index pour les tables déchargées
@@ -7826,7 +7829,7 @@ ALTER TABLE `genres`
 -- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_user_category` FOREIGN KEY (`category_id`) REFERENCES `user_categories` (`category_id`);
+  ADD CONSTRAINT `fk_user_category` FOREIGN KEY (`category_id`) REFERENCES `user_categories` (`category_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

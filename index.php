@@ -20,14 +20,14 @@ $page = 'Accueil';
 <!-- ------------------------------------------------------------- -->
 
 <body class="grid">
-    
+
     <?php
     include '_header.php';
     ?>
 
     <main class="main-main">
         Main
-        
+
 
     </main>
 
