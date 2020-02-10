@@ -56,7 +56,7 @@ $page = 'Livres';
             </fieldset>
         </form>
 
-<!-- ------------------------------------------------------------- -->
+        <!-- ------------------------------------------------------------- -->
 
         <?php
         if ($_SERVER['QUERY_STRING']) {
@@ -82,9 +82,10 @@ $page = 'Livres';
 
                 </tbody>
             </table>
-<!-- ------------------------------------------------------------- -->
+            <!-- ------------------------------------------------------------- -->
 
-            <script>            // chargement de la DATATABLE jquery
+            <script>
+                // chargement de la DATATABLE jquery
                 $(document).ready(function() {
                     $('#results').DataTable();
                 });
@@ -93,17 +94,9 @@ $page = 'Livres';
 
     </main>
 
-
-
-
-    <aside class="basket">
-
-        Panier
-
-    </aside>
-
-
-
+    <?php
+    include '_basket.php';
+    ?>
 
 </body>
 

@@ -31,15 +31,9 @@ $page = 'Accueil';
 
     </main>
 
-
-
-
-    <aside class="basket">
-        Panier
-    </aside>
-
-
-
+    <?php
+    include '_basket.php';
+    ?>
 
 </body>
 

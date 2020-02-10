@@ -52,3 +52,17 @@ function searchBooks($author, $title, $genre)
             $query = $pdo->query($sql);
             return $query->fetchAll();
 }
+
+function getUsers()
+{
+    $pdo = newPDO();
+    $query = $pdo->query(
+        "SELECT * FROM users NATURAL JOIN user_categories;"
+    );
+    return $query->fetchAll();
+}
+
+function newUser($user_id, $password, $category_id, $first_name, $last_name)
+{
+
+}

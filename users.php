@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '__dao.php';
 $page = 'Usagers';
 ?>
 
@@ -26,20 +27,31 @@ $page = 'Usagers';
     ?>
 
     <main class="main-main">
-        Main
 
+    <table id="results">
+                <thead>
+                    <tr>
+                        <th>user_id</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                foreach (getUsers() as $user) {
+                    echo "<tr><td>$user[user_id]</td><td>$user[first_name]</td><td>$user[last_name]</td></tr>";
+                }
+                ?>
+
+                </tbody>
+            </table>
 
     </main>
 
-
-
-
-    <aside class="basket">
-        Panier
-    </aside>
-
-
-
+    <?php
+    include '_basket.php';
+    ?>
 
 </body>
 
