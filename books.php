@@ -16,8 +16,8 @@ $page = 'Livres';
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>        <!-- required for DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- required for DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 </head>
@@ -38,10 +38,11 @@ $page = 'Livres';
                 <legend>Recherche par critères</legend>
                 Nom ou prénom: <input type="text" name="author"><wbr>
                 Titre: <input type="text" name="title"><br>
-                Genre: <select name="genre">            <!-- menu déroulant des thèmes -->
+                Genre: <select name="genre">
+                    <!-- menu déroulant des thèmes -->
                     <option value='' default>tous</option>
                     <?php
-                    $pdo = mysqlPDO();      // function in require '__dao.php';
+                    $pdo = newPDO();      // function in require '__dao.php';
                     $query = $pdo->query("SELECT genre_id, genre FROM `genres`");
                     $data = $query->fetchAll();
                     foreach ($data as $genre) {
@@ -80,7 +81,7 @@ $page = 'Livres';
 
             $sql .= " GROUP BY title";
 
-            $pdo = mysqlPDO();      // function in require '__dao.php';
+            $pdo = newPDO();      // function in require '__dao.php';
             $query = $pdo->query($sql);
             $data = $query->fetchAll();
         ?>
