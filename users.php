@@ -28,15 +28,42 @@ $page = 'Usagers';
 
     <main class="main-main">
 
-    <table id="results">
-                <thead>
-                    <tr>
-                        <th>user_id</th>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <form action="__createuser.php" method="POST">
+            <fieldset>
+                <legend>Ajouter un usager</legend>
+                <label for="first_name">Prénom : </label><input type="text" id="first_name" name="first_name">
+                <label for="last_name">Nom : </label><input type="text" id="last_name" name="last_name"><br>
+                <label for="user_id">User_ID : </label><input type="text" id="user_id" name="user_id">
+                <label for="category_id">Catégorie : </label><select id="category_id" name="category_id"><br>
+
+                    <!-- menu déroulant des catégories d'utilisateur -->
+                    <option value='' default>---</option>
+
+                    <?php
+                    foreach (getCategories() as $categ) {   // from __dao.php
+                        echo "<option value='$categ[category_id]'>$categ[category]</option>";
+                    }
+                    ?>
+
+                </select><br>
+                <label for="password">Mot de passe : </label><input type="password" id="password" name="password">
+                <input type="submit" value="Valider">
+
+
+            </fieldset>
+
+        </form><br>
+
+        <!-- ------------------------------------------------------------- -->
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>user_id</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
 
                 <?php
                 foreach (getUsers() as $user) {
@@ -44,8 +71,8 @@ $page = 'Usagers';
                 }
                 ?>
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
     </main>
 
