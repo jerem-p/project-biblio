@@ -14,7 +14,7 @@ function newPDO()       // "DAL" = data access layer
 function getUserInfo($user_name)
 {
     $pdo = newPDO();
-    $query = $pdo->query(
+    $query = $pdo->query(       // $query ~ PDOStatement object
         "SELECT * FROM users NATURAL JOIN user_categories WHERE user_id='$user_name';"
     );
     return $query->fetch();
@@ -73,13 +73,10 @@ function getUsers()
 
 function createUser($user_id, $password, $category_id, $first_name, $last_name)
 {
-    // INSERT INTO `users` (`user_id`, `password`, `category_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `street_address`, `city_name`, `postal_code`, `membership_start`, `membership_end`) VALUES ('CHECHR001', '$2y$10$vxN1zDsfWIWCX2eMZCC5jOVwOzFaHi3C/zoh9T9xVPFb6F90P91a6', '3', 'Christine', 'Cheng', NULL, NULL, NULL, NULL, NULL, '2020-02-11', NULL);
-
     $password = password_hash($password, PASSWORD_DEFAULT);
     $pdo = newPDO();
-    $query = $pdo->query(
+    return $pdo->exec(
         "INSERT INTO `users` (`user_id`, `password`, `category_id`, `first_name`, `last_name`)
         VALUES ('$user_id', '$password', '$category_id', '$first_name', '$last_name');"
     );
-    return $query->execute();
 }

@@ -40,7 +40,7 @@
     if (isset($_SESSION['user_id'])) {
     ?>
 
-        <a href="user_account.php">Mon compte</a>
+        <a href="useraccount.php">Mon compte</a>
 
     <?php
     }
