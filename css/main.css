@@ -1,6 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(#fca643, #f0b97a) ;
+    background-image: linear-gradient(#fca745, #f0b97a) ;
 }
 .grid {
     margin: auto;
@@ -16,7 +16,7 @@
 .grid > * {
     margin: 0;
     padding: 1rem;
-    background: #42defa;
+    background-image: linear-gradient(#37dbf8, #8ae5f5);
 }
 
 .top-logo {
