@@ -11,14 +11,14 @@
 
         Bonjour, <b><?= $_SESSION['user_first_name'] ?></b><br>
         (<?= $_SESSION['user_category'] ?>)<br>
-        <a href="library/connect.php">Déconnexion</a>
+        <a href="index.php?page=home&do=disconnect">Déconnexion</a>
 
     <?php
     } else {
     ?>
 
         Identifiez-vous :
-        <form action="library/connect.php" method="get">
+        <form action="index.php?page=home&do=connect" method="POST">
             <input type="text" name="user_id"><br>
             <input type="password" name="user_pw"><br>
             <button type="submit">Connexion</button><br>
