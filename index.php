@@ -2,8 +2,8 @@
 
 session_start();
 
-$page = isset($_GET['page']) ? $_GET['page'] : 'home';
-$do = isset($_GET['do']) ? $_GET['do'] : '';
+$page = isset($_GET['page']) ? filter_var($_GET['page'], FILTER_SANITIZE_ENCODED) : 'home';    //filtrage
+$do = isset($_GET['do']) ? filter_var($_GET['do'], FILTER_SANITIZE_ENCODED) : '';
 
 switch ($page) {
     case 'home':
@@ -38,7 +38,7 @@ switch ($page) {
 
     case 'account':
         $title = 'Mon compte';
-        include 'page/useraccount.php';
+        include 'page/account.php';
         break;
 
 
