@@ -34,7 +34,7 @@ switch ($page) {
                 break;
         }
         break;
-        
+
 
     case 'account':
         $title = 'Mon compte';
@@ -43,7 +43,14 @@ switch ($page) {
 
 
     case 'users':
-        $title = 'Usagers';
-        include 'page/users.php';
+        switch ($do) {
+            default:
+                $title = 'Usagers';
+                include 'page/users.php';
+                break;
+            case 'create':
+                include 'library/createuser.php';
+                break;
+        }
         break;
 }

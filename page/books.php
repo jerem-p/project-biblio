@@ -1,104 +1,76 @@
 <?php
 require 'library/_dao.php';
+include '_header.php';
 ?>
 
-<!-- ------------------------------------------------------------- -->
 
-<!DOCTYPE html>
-<html>
+<main class="main-main">
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Project Biblio<?= " - $title" ?></title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='style/main.css'>
-    <link rel="stylesheet" type="text/css" href="style/jquery.dataTables.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- required for DataTables -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <form action="index.php?page=books&do=search" method="POST">
+        <fieldset name="recherche">
+            <legend>Recherche par critères</legend>
+            Nom ou prénom: <input type="text" name="author"><wbr>
+            Titre: <input type="text" name="title"><br>
+            Genre: <select name="genre">
 
-</head>
+                <!-- menu déroulant des thèmes -->
+                <option value='' default>tous</option>
 
-<!-- ------------------------------------------------------------- -->
+                <?php
+                foreach (getBookGenres() as $genre) {   // from library/_dao.php
+                    echo "<option value='$genre[genre_id]'>$genre[genre]</option>";
+                }
+                ?>
 
-<body class="grid">
+            </select>
+
+            <input type="submit" value="Rechercher">
+
+        </fieldset>
+    </form>
+
+    <!-- ------------------------------------------------------------- -->
 
     <?php
-    include '_header.php';
+    if ($do == 'search') {
+
+    ?>
+
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php
+                foreach (searchBooks($_POST['author'], $_POST['title'], $_POST['genre']) as $book) {
+                    echo "<tr><td>$book[title]</td><td>$book[author]</td><td>$book[genre]</td></tr>";
+                }
+                ?>
+
+            </tbody>
+        </table>
+
+        <script>
+            // chargement de la DATATABLE jquery
+            $(document).ready(function() {
+                $('#results').DataTable();
+            });
+        </script>
+
+    <?php
+    }
     ?>
 
 
-    <main class="main-main">
 
-        <form action="index.php?page=books&do=search" method="POST">
-            <fieldset name="recherche">
-                <legend>Recherche par critères</legend>
-                Nom ou prénom: <input type="text" name="author"><wbr>
-                Titre: <input type="text" name="title"><br>
-                Genre: <select name="genre">
+</main>
 
-                    <!-- menu déroulant des thèmes -->
-                    <option value='' default>tous</option>
-
-                    <?php
-                    foreach (getBookGenres() as $genre) {   // from library/_dao.php
-                        echo "<option value='$genre[genre_id]'>$genre[genre]</option>";
-                    }
-                    ?>
-
-                </select>
-
-                <input type="submit" value="Rechercher">
-
-            </fieldset>
-        </form>
-
-        <!-- ------------------------------------------------------------- -->
-
-        <?php
-        if ($do == 'search') {
-
-        ?>
-
-            <table id="results">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Genre</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-                    foreach (searchBooks($_POST['author'], $_POST['title'], $_POST['genre']) as $book) {
-                        echo "<tr><td>$book[title]</td><td>$book[author]</td><td>$book[genre]</td></tr>";
-                    }
-                    ?>
-
-                </tbody>
-            </table>
-
-            <script>
-                // chargement de la DATATABLE jquery
-                $(document).ready(function() {
-                    $('#results').DataTable();
-                });
-            </script>
-            
-        <?php
-        }
-        ?>
-
-
-
-    </main>
-
-    <?php
-    include '_basket.php';
-    ?>
-
-</body>
-
-</html>
+<?php
+include '_basket.php';
+include '_footer.php';
+?>
