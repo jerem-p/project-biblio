@@ -1,6 +1,6 @@
 <?php
 require 'library/_dao.php';
-include '_header.php';
+include 'page/_header.php';
 ?>
 
 <main class="main-main">
@@ -32,6 +32,6 @@ include '_header.php';
 </main>
 
 <?php
-include '_basket.php';
-include '_footer.php';
+include 'page/_basket.php';
+include 'page/_footer.php';
 ?>
