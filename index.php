@@ -7,8 +7,26 @@ $do = isset($_GET['do']) ? $_GET['do'] : '';
 
 switch ($page) {
     case 'home':
-        $page_name = 'Accueil';
+        $title = 'Accueil';
         include 'page/home.php';
+    break;
+
+
+    case 'books':
+        $title = 'Livres';
+        include 'page/books.php';
+    break;
+
+
+    case 'account':
+        $title = 'Mon compte';
+        include 'page/useraccount.php';
+    break;
+
+
+    case 'users':
+        $title = 'Usagers';
+        include 'page/users.php';
     break;
     
 }

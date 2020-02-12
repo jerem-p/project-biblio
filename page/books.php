@@ -1,7 +1,5 @@
 <?php
-session_start();
-require '__dao.php';
-$page = 'Livres';
+require 'library/_dao.php';
 ?>
 
 <!-- ------------------------------------------------------------- -->
@@ -15,8 +13,8 @@ $page = 'Livres';
     <title>Project Biblio<?= " - $page" ?></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='style/main.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/style/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- required for DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
@@ -44,7 +42,7 @@ $page = 'Livres';
                     <option value='' default>tous</option>
 
                     <?php
-                    foreach (getBookGenres() as $genre) {   // from __dao.php
+                    foreach (getBookGenres() as $genre) {   // from library/_dao.php
                         echo "<option value='$genre[genre_id]'>$genre[genre]</option>";
                     }
                     ?>

@@ -1,7 +1,5 @@
 <?php
-session_start();
-require '__dao.php';
-$page = 'Usagers';
+require 'library/_dao.php';
 ?>
 
 <!-- ------------------------------------------------------------- -->
@@ -15,7 +13,7 @@ $page = 'Usagers';
     <title>Project Biblio<?= " - $page" ?></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style/main.css'>
 </head>
 
 <!-- ------------------------------------------------------------- -->
@@ -28,7 +26,7 @@ $page = 'Usagers';
 
     <main class="main-main">
 
-        <form action="__createuser.php" method="POST">
+        <form action="library/createuser.php" method="POST">
             <fieldset>
                 <legend>Ajouter un usager</legend>
                 <label for="first_name">Prénom : </label><input type="text" id="first_name" name="first_name">
@@ -40,7 +38,7 @@ $page = 'Usagers';
                     <option value='' default>---</option>
 
                     <?php
-                    foreach (getCategories() as $categ) {   // from __dao.php
+                    foreach (getCategories() as $categ) {   // from library/_dao.php
                         echo "<option value='$categ[category_id]'>$categ[category]</option>";
                     }
                     ?>

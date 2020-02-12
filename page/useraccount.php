@@ -1,7 +1,5 @@
 <?php
-session_start();
-require '__dao.php';
-$page = 'Mon compte';
+require 'library/_dao.php';
 ?>
 
 <!-- ------------------------------------------------------------- -->
@@ -15,7 +13,7 @@ $page = 'Mon compte';
     <title>Project Biblio<?= " - $page" ?></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style/main.css'>
 </head>
 
 <!-- ------------------------------------------------------------- -->

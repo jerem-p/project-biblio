@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '__dao.php';
+require 'library/_dao.php';
 $from_page = $_SERVER['HTTP_REFERER'];   // page d'origine
 
 
