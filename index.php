@@ -5,6 +5,7 @@ session_start();
 $page = isset($_GET['page']) ? filter_var($_GET['page'], FILTER_SANITIZE_ENCODED) : 'home';    //filtrage
 $do = isset($_GET['do']) ? filter_var($_GET['do'], FILTER_SANITIZE_ENCODED) : '';
 
+
 switch ($page) {
     case 'home':
         switch ($do) {
