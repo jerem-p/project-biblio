@@ -1,40 +1,57 @@
 <?php
+
 session_start();
-$page = 'Accueil';
-?>
 
-<!-- ------------------------------------------------------------- -->
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Project Biblio<?= " - $page" ?></title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-</head>
-
-<!-- ------------------------------------------------------------- -->
-
-<body class="grid">
-
-    <?php
-    include '_header.php';
-    ?>
-
-    <main class="main-main">
-        Main
+$page = isset($_GET['page']) ? filter_var($_GET['page'], FILTER_SANITIZE_ENCODED) : 'home';    //filtrage
+$do = isset($_GET['do']) ? filter_var($_GET['do'], FILTER_SANITIZE_ENCODED) : '';
 
 
-    </main>
+switch ($page) {
+    case 'home':
+        switch ($do) {
+            default:
+                $title = 'Accueil';
+                include 'page/home.php';
+                break;
+            case 'connect':
+                include 'library/connect.php';
+                break;
+            case 'disconnect':
+                include 'library/connect.php';
+                break;
+        }
+        break;
 
-    <?php
-    include '_basket.php';
-    ?>
 
-</body>
+    case 'books':
+        switch ($do) {
+            default:
+                $title = 'Livres';
+                include 'page/books.php';
+                break;
+            case 'search':
+                $title = 'Livres';
+                include 'page/books.php';
+                break;
+        }
+        break;
 
-</html>
+
+    case 'account':
+        $title = 'Mon compte';
+        include 'page/account.php';
+        break;
+
+
+    case 'users':
+        switch ($do) {
+            default:
+                $title = 'Usagers';
+                include 'page/users.php';
+                break;
+            case 'create':
+                include 'library/createuser.php';
+                break;
+        }
+        break;
+}
