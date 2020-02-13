@@ -1,4 +1,5 @@
 <?php
+require 'class/data.php';
 require 'library/_dao.php';
 
 if (isset($_SESSION['user_id'])) {     // depuis le lien "déconnexion"
