@@ -3,9 +3,9 @@ include 'page/_header.php';
 ?>
 
 <main class="main-main">
-    
+
     <?php
-    echo "Hello, " . date('Y-m-d');
+    echo "Hello, you. " . date('Y-m-d');
     ?>
 
 </main>
