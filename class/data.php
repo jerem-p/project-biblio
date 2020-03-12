@@ -22,5 +22,3 @@ class Data extends PDO
         // modif de l'ERRMODE à la création (par défaut, PDO::ERRMODE_SILENT)
     }
 }
-
-

@@ -3,7 +3,11 @@ include 'page/_header.php';
 ?>
 
 <main class="main-main">
-    Main
+    
+    <?php
+    echo date('Y-m-d');
+    ?>
+
 </main>
 
 <?php
