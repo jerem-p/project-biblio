@@ -5,7 +5,7 @@ include 'page/_header.php';
 <main class="main-main">
     
     <?php
-    echo date('Y-m-d');
+    echo "Hello, " . date('Y-m-d');
     ?>
 
 </main>
